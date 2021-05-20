@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .wrapper {
+    display: flex;
+    width: 300px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: red;
+    overflow: hidden;
+    transition: all 1s ease-out;
+  }
+
+  .item {
+    width: 100px;
+    height: 30px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    color: black;
+    list-style: none;
+    text-align: center;
+    margin-left: 10px;
+  }
+</style>
+
+<body>
+  <div class="wrapper">
+    <li class="item">ljj</li>
+    <li class="item">fkahkf</li>
+    <li class="item">fkahkf</li>
+    <li class="item">fkahkf</li>
+    <li class="item">fkahkf</li>
+    <li class="item">jlfajlkfjjlfjlaf</li>
+    <li class="item">jlfajlkfjjlfjlaf</li>
+    <li class="item">jlfajlkfjjlfjlaf</li>
+    <li class="item">jlfajlkfjjlfjlaf</li>
+    <li class="item">jlfajlkfjjlfjlaf</li>
+  </div>
+  <button id="btn">切换展开折叠</button>
+</body>
+<script>
+  let collapsed = true;
+  const wrapper = document.querySelector('.wrapper')
+  let scrollHeight = wrapper.scrollHeight;
+  document.querySelector('#btn').addEventListener('click', toggle)
+  function toggle() {
+    if (collapsed) {
+      wrapper.style.height = scrollHeight+'px'
+    } else {
+      wrapper.style.height = '60px'
+    }
+    collapsed = !collapsed;
+  }
+</script>
+
+</html>
