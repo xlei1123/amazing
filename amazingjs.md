@@ -38,3 +38,96 @@ Array.Prototype.myflat = function() {
 }
 ```
 
+5. 表驱动改善if/switch
+
+demo1:
+代码改善前：
+```js
+const day = new Date().getDay();
+let day_zh;
+if(day === 0){
+    day_zh = '星期日'
+}else if(day === 1) {
+    day_zh = '星期一'
+}
+...
+else{
+    day_zh = '星期六'
+}
+
+// 或者 用 switch case
+switch(day) {
+  case 0:
+    day_zh = '星期日'
+    break;
+  case 1:
+    day_zh = '星期一'
+    break;
+    ...
+}
+
+```
+表驱动改善后：
+```js
+const week = ['星期日', '星期一',..., '星期六'];
+const day = new Date().getDay();
+const day_zh = week[day];
+```
+
+demo2: 考试按分数评优良中差四个等级
+
+```js
+  let level = '优'
+  if(score <60 ){
+    level = '差'
+  }else if(score < 80) {
+    level = '中'
+  }else if(score < 90) {
+    level = '良'
+  }
+
+```
+
+如果需要添加等级 60-70 之间 是一般，就需要改逻辑，逻辑简单的还好
+
+```js
+  let level = '优';
+  if(score <60 ){
+    level = '差'
+  }else if(score < 70) {
+    level = '一般'
+  }else if(score < 80) {
+    level = '中'
+  }else if(score < 90) {
+    level = '良'
+  }
+
+```
+
+表驱动改善后：用阶梯查询就比较方便，而且扩展性也好
+
+```js
+  const levelTable = ['差', '中', '良', '优'];
+  const scoreCeilTable = [60, 80, 90, 100];
+  
+  function getLevel(score) {
+    const len = scoreCeilTable.length
+    for(let i = 0; i < len; i++) {
+      const scoreCeil = scoreCeilTable[i]
+      if(score <= scoreCeil) {
+        return levelTable[i]
+      }
+        
+    }
+    return levelTable[len - 1];
+  }
+
+```
+
+就算后面需要添加等级60-70 ---> '一般' 也只需要简单添加数据表就可以了，而不需要修改逻辑
+
+```js
+  const levelTable = ['差', '一般', '中', '良', '优'];
+  const scoreCeilTable = [60, 70, 80, 90, 100];
+
+```
