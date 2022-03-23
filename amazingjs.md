@@ -131,3 +131,29 @@ demo2: 考试按分数评优良中差四个等级
   const scoreCeilTable = [60, 70, 80, 90, 100];
 
 ```
+6. 函数传参
+常见有多个参数，对于需要传递函数的 我们经常会传递一个什么都不执行的函数() => {}, null等，下面这种提供了另外一种思路：
+```js
+ // 定义一个person函数
+ function person(name,age,say){
+   if(typeof age === 'function'){ // 重点在这里
+      say = age;
+   }
+   say && say();
+ }
+ // 调用方法一
+ person('Bryson',22,function(){
+   console.log('我是Bryson啊')
+ })
+ // Bryson 22
+ // 我是Bryson啊
+ ​
+ // 调用方法二，不传age，让function()直接切换给age
+ person('Bryson',function(){
+   console.log('我是Bryson啊')
+ })
+ // Bryson f(){console.log('我是Bryson啊')}
+ // 我是Bryson啊
+
+```
+
